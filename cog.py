@@ -38,7 +38,6 @@ class Cog:
     def classified_position(self, df , point_list):
 
         for i in range(len(point_list)):
-            print(i)
             df['거점'+ str(i+1)] = np.sqrt((df['위도 곡률값'] - point_list[i][0]) ** 2 + (df['경도 곡률값'] - point_list[i][1]) ** 2)
 
         name_list = ["거점"+str(i+1) for i in range(len(point_list))]
