@@ -104,9 +104,9 @@ class Cog:
 
             s_df =pd.concat([s_df, d_s])
 
-            d_s.to_csv("총_" +str(len(point_list)) +"_거점별_데이터_"+str(i+1)+"번째.csv", encoding='cp949')
+            d_s.to_csv("../result/총_" +str(len(point_list)) +"_거점별_데이터_"+str(i+1)+"번째 거점.csv", encoding='cp949')
 
-        s_df.to_excel('거점_'+ str(len(point_list))+'_시뮬레시션_raw(전주공장픽스).xlsx')
+        s_df.to_excel('../result/거점_'+ str(len(point_list))+'_시뮬레시션_raw(전주공장픽스).xlsx')
 
         s_df = s_df.loc[:, ['위경도 좌표_y', '위경도 좌표_x', '거래처수', '총수량', 'Transport Cost']]
         s_df = s_df.drop_duplicates()
