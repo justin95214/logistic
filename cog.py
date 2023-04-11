@@ -115,7 +115,7 @@ class Cog:
 
             d_s.to_csv("../result/총_" +str(len(point_list)) +"_거점별_데이터_"+str(i+1)+"번째 거점.csv", encoding='cp949')
             
-            count+=1
+            count-=1
             
 
         s_df.to_excel('../result/거점_'+ str(len(point_list))+'_시뮬레시션_raw(전주공장픽스).xlsx')
