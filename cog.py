@@ -120,17 +120,19 @@ class Cog:
         s_df_y2 = s_df['위경도 좌표_y2'].values.tolist()
         before_y1 = [ x[1] for x in point_list]
         
-        s_df['위경도 좌표_y'] = 0
+        s_df_list = []
         
         for i in len(s_df_y1):
             if s_df_y1[i] in before_y1:
-                s_df.loc[i, '위경도 좌표_y'] = s_df_y1[i]
+                s_df_list.append(s_df_y1[i])
             else:
-                 s_df.loc[i, '위경도 좌표_y'] = s_df_y2[i]
+                s_df_list.append(s_df_y2[i])
+        
         
         
         s_df = s_df.drop_duplicates()
         s_df = s_df.reset_index(drop=False)
+        s_df['위경도 좌표_y'] =pd.DataFrame(s_df_list)
 
         s_df['Warehous_Cost'] = price_list
         s_df['Total Cost'] = s_df['Transport Cost'] + s_df['Warehous_Cost'] * np.sqrt(1)
