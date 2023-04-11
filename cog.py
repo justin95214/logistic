@@ -83,7 +83,7 @@ class Cog:
             d_s['가상 거점_y(곡률값)'] = d_s['가상 거점_y'] / 0.0245 + d_s['위도간 거리(기준)_곡률값']
 
             
-            if( count > d_count):
+            if( count <= d_count):
                 d_s['위경도 좌표_x'] = point_list[i][1]/3600
                 d_s['위경도 좌표_y'] = point_list[i][0]/3600
             else:
