@@ -36,9 +36,9 @@ def func1(dt) :
 
 df['선택거점_위도'] = df['선택'].apply(func)
 df['선택거점_경도'] = df['선택'].apply(func1)
-
 test_a.cal_standard_curvature_value(df)
-result_df = test_a.cal_point_result(df, test_list)
 
+# 결과 산출 및 정리된 표 생성 warehouse_cost, total cost 등등 계산
+result_df = test_a.cal_point_result(df, test_list, dynamic_count)
 
-result_df.to_excel('거점'+ str(len(test_list)) +'청주 시뮬레시션1(전주공장픽스).xlsx')
+result_df.to_excel('../result/거점_'+ str(len(test_list)) +'_청주 시뮬레시션1(전주공장픽스).xlsx')
