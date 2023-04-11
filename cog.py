@@ -62,11 +62,12 @@ class Cog:
 
 
 
-    def cal_point_result(self, df, point_list):
+    def cal_point_result(self, df, point_list, d_count):
 
         s_df =pd.DataFrame()
         price_list = 150000000
-
+        
+        count =0
         for i in range(len(point_list)):
 
             d_s = df[df['선택'] == '거점'+str(i+1)]
@@ -81,9 +82,12 @@ class Cog:
             d_s['가상 거점_x(곡률값)'] = d_s['가상 거점_x'] / 0.0306 + d_s['경도간 거리(기준)_곡률값']
             d_s['가상 거점_y(곡률값)'] = d_s['가상 거점_y'] / 0.0245 + d_s['위도간 거리(기준)_곡률값']
 
-
-            d_s['위경도 좌표_x'] = point_list[i][1]
-            d_s['위경도 좌표_y'] = point_list[i][0]
+            if count == d_count:
+                d_s['위경도 좌표_x'] = point_list[i][1]/3600
+                d_s['위경도 좌표_y'] = point_list[i][0]/3600
+            else:
+                d_s['위경도 좌표_x'] = d_s['가상 거점_x']/3600
+                d_s['위경도 좌표_y'] = d_s['가상 거점_y']/3600
 
             d_s['거래처수'] = d_s['선택'].count()
 
@@ -105,6 +109,9 @@ class Cog:
             s_df =pd.concat([s_df, d_s])
 
             d_s.to_csv("../result/총_" +str(len(point_list)) +"_거점별_데이터_"+str(i+1)+"번째 거점.csv", encoding='cp949')
+            
+            count+=1
+            
 
         s_df.to_excel('../result/거점_'+ str(len(point_list))+'_시뮬레시션_raw(전주공장픽스).xlsx')
 
