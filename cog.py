@@ -95,8 +95,8 @@ class Cog:
             d_s['X_곡률걊'] = d_s['가상 거점_x'] / 0.0306 + d_s['경도간 거리(기준)_곡률값']
             d_s['Y_곡률걊'] = d_s['가상 거점_y'] / 0.0245 + d_s['위도간 거리(기준)_곡률값']
 
-            d_s['경도 죄표_X'] = d_s['X_곡률걊'] / 3600
-            d_s['위도 죄표_Y'] = d_s['Y_곡률걊'] / 3600
+            d_s['경도 좌표_X'] = d_s['X_곡률걊'] / 3600
+            d_s['위도 좌표_Y'] = d_s['Y_곡률걊'] / 3600
             d_s['TC'] = d_s['VR'] * d_s['(Y-Yi)^2 + (X-Xi)^2']
             d_s['Transport Cost'] = d_s['TC'].sum()
             b = d_s['Demand\n(Vi)'].sum()
@@ -108,7 +108,7 @@ class Cog:
 
         s_df.to_excel('../result/거점_'+ str(len(point_list))+'_시뮬레시션_raw(전주공장픽스).xlsx')
 
-        s_df = s_df.loc[:, ['위도 좌표_y', '위도 좌표_x', '거래처수', '총수량', 'Transport Cost']]
+        s_df = s_df.loc[:, ['위도 좌표_y', '경도 좌표_x', '거래처수', '총수량', 'Transport Cost']]
         s_df = s_df.drop_duplicates()
         s_df = s_df.reset_index(drop=False)
 
