@@ -114,7 +114,9 @@ class Cog:
 
         s_df.to_excel('../result/거점_'+ str(len(point_list))+'_시뮬레시션_raw(전주공장픽스).xlsx')
 
-        s_df = s_df.loc[:, ['위경도 좌표_y', '위경도 좌표_x', '거래처수', '총수량', 'Transport Cost']]
+        s_df = s_df.loc[:, ['위경도 좌표_y1', '위경도 좌표_x1', '위경도 좌표_y2', '위경도 좌표_x2', '거래처수', '총수량', 'Transport Cost']]
+        
+        
         s_df = s_df.drop_duplicates()
         s_df = s_df.reset_index(drop=False)
 
