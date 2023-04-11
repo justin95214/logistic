@@ -67,6 +67,7 @@ class Cog:
         s_df =pd.DataFrame()
         price_list = 150000000
         
+        count =1
         for i in range(len(point_list)):
 
             d_s = df[df['선택'] == '거점'+str(i+1)]
@@ -82,12 +83,17 @@ class Cog:
             d_s['가상 거점_y(곡률값)'] = d_s['가상 거점_y'] / 0.0245 + d_s['위도간 거리(기준)_곡률값']
 
             
-            d_s['위경도 좌표_x1'] = point_list[i][1]/3600
-            d_s['위경도 좌표_y1'] = point_list[i][0]/3600
+            if( count <= d_count):
+                d_s['위경도 좌표_x1'] = point_list[i][1]/3600
+                d_s['위경도 좌표_y1'] = point_list[i][0]/3600
+            else:
+                d_s['위경도 좌표_x2'] = d_s['가상 거점_x(곡률값)']/3600
+                d_s['위경도 좌표_y2'] = d_s['가상 거점_y(곡률값)']/3600
 
-            d_s['위경도 좌표_x2'] = d_s['가상 거점_x(곡률값)']/3600
-            d_s['위경도 좌표_y2'] = d_s['가상 거점_y(곡률값)']/3600
-
+            
+            
+            
+            
             d_s['거래처수'] = d_s['선택'].count()
 
             # (Y-Yi)^2 = 가상 센터에서 거래처 간의 거리
@@ -109,30 +115,17 @@ class Cog:
 
             d_s.to_csv("../result/총_" +str(len(point_list)) +"_거점별_데이터_"+str(i+1)+"번째 거점.csv", encoding='cp949')
             
-            
+            count+=1
             
 
         s_df.to_excel('../result/거점_'+ str(len(point_list))+'_시뮬레시션_raw(전주공장픽스).xlsx')
 
-        s_df = s_df.loc[:, ['위경도 좌표_y1', '위경도 좌표_x1', '위경도 좌표_y2', '위경도 좌표_x2', '거래처수', '총수량', 'Transport Cost']]
-        
-        s_df_y1 = s_df['위경도 좌표_y1'].values.tolist()
-        s_df_y2 = s_df['위경도 좌표_y2'].values.tolist()
-        before_y1 = [ x[1] for x in point_list]
-        
-        s_df_list = []
-        
-        for i in range(len(s_df_y1)):
-            if s_df_y1[i] in before_y1:
-                s_df_list.append(s_df_y1[i])
-            else:
-                s_df_list.append(s_df_y2[i])
-        
-        
+        s_df = s_df.loc[:, ['위경도 좌표_y', '위경도 좌표_x', '거래처수', '총수량', 'Transport Cost']]
+
         
         s_df = s_df.drop_duplicates()
         s_df = s_df.reset_index(drop=False)
-        s_df['위경도 좌표_y'] =pd.DataFrame(s_df_list)
+
 
         s_df['Warehous_Cost'] = price_list
         s_df['Total Cost'] = s_df['Transport Cost'] + s_df['Warehous_Cost'] * np.sqrt(1)
