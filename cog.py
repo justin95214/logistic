@@ -122,7 +122,7 @@ class Cog:
         
         s_df_list = []
         
-        for i in len(s_df_y1):
+        for i in range(len(s_df_y1)):
             if s_df_y1[i] in before_y1:
                 s_df_list.append(s_df_y1[i])
             else:
