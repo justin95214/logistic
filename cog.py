@@ -116,6 +116,18 @@ class Cog:
 
         s_df = s_df.loc[:, ['위경도 좌표_y1', '위경도 좌표_x1', '위경도 좌표_y2', '위경도 좌표_x2', '거래처수', '총수량', 'Transport Cost']]
         
+        s_df_y1 = s_df['위경도 좌표_y1'].values.tolist()
+        s_df_y2 = s_df['위경도 좌표_y2'].values.tolist()
+        before_y1 = [ x[1] for x in point_list]
+        
+        s_df['위경도 좌표_y'] = 0
+        
+        for i in len(s_df_y1):
+            if s_df_y1[i] in before_y1:
+                s_df.loc[i, '위경도 좌표_y'] = s_df_y1[i]
+            else:
+                 s_df.loc[i, '위경도 좌표_y'] = s_df_y2[i]
+        
         
         s_df = s_df.drop_duplicates()
         s_df = s_df.reset_index(drop=False)
