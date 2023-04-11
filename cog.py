@@ -67,7 +67,7 @@ class Cog:
         s_df =pd.DataFrame()
         price_list = 150000000
         
-        count =1
+        count = len(point_list)
         for i in range(len(point_list)):
 
             d_s = df[df['선택'] == '거점'+str(i+1)]
