@@ -113,8 +113,8 @@ class Cog:
             list_a.append((d_y, d_x))
             
             
-            d_s['위경도 좌표_y'] = d_s['선택'].apply(self.func, args= list_a)
-            d_s['위경도 좌표_x'] = d_s['선택'].apply(self.func1, args= list_a)
+            d_s['위경도 좌표_y'] = d_s['선택'].apply(self.func, args= (list_a))
+            d_s['위경도 좌표_x'] = d_s['선택'].apply(self.func1, args= (list_a))
 
             
             d_s['거래처수'] = d_s['선택'].count()
