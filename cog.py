@@ -67,18 +67,18 @@ class Cog:
 
     #apply함수를 위한 함수들
     #위도
-    def func(self, dt) :
+    def func(self, dt, list_a) :
       
-        for i in range(len(self.name_list)):
-            if dt == self.name_list[i]:
-                a  = self.fixed_point[i][0]/3600
+        for i in range(len(list_a)):
+            if dt == list_a[i]:
+                a  = list_a[i][0]/3600
                 return a
             
     #경도
-    def func1(self, dt) :
-        for i in range(len(self.name_list)):
-            if dt == self.name_list[i]:
-                a = self.fixed_point[i][1]/3600
+    def func1(self, dt, list_a) :
+        for i in range(list_a):
+            if dt == list_a[i]:
+                a = list_a[i][1]/3600
                 return a
 
     def cal_point_result(self, df, point_list, d_count):
@@ -104,10 +104,17 @@ class Cog:
             
            
             d_s['위경도 좌표_x'] = d_s['가상 거점_x(곡률값)']/3600
+            d_x = d_s['위경도 좌표_x'] .values.tolist()[0]
+            
             d_s['위경도 좌표_y'] = d_s['가상 거점_y(곡률값)']/3600
-
-            d_s['위경도 좌표_y'] = d_s['선택'].apply(self.func)
-            d_s['위경도 좌표_x'] = d_s['선택'].apply(self.func1)
+            d_y = d_s['위경도 좌표_y] .values.tolist()[0]
+            
+            list_a = self.fixed_point
+            list_a.append((d_y, d_x))
+            
+            
+            d_s['위경도 좌표_y'] = d_s['선택'].apply(self.func, args= list_a)
+            d_s['위경도 좌표_x'] = d_s['선택'].apply(self.func1, args= list_a)
 
             
             d_s['거래처수'] = d_s['선택'].count()
