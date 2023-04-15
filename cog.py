@@ -32,8 +32,9 @@ class Cog:
     def make_position(self, df, count):
         point_list = []
         position_list = [  (df.loc[i, '위도 곡률값'], df.loc[i, '경도 곡률값'])  for i in range(count) ]
-        point_list.extend(position_list)
         point_list.extend(self.fixed_point)
+        point_list.extend(position_list)
+        
         return point_list
 
 
