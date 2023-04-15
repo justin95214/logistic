@@ -111,6 +111,7 @@ class Cog:
             d_s['위경도 좌표_y'] = d_s['선택'].apply(self.func)
             d_s['위경도 좌표_x'] = d_s['선택'].apply(self.func1)
             
+            print(d_s['위경도 좌표_x'].values.tolist())
             tmp = d_s['위경도 좌표_x'].values.tolist()
             
             if len(tmp) ==0:
