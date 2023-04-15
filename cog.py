@@ -5,9 +5,11 @@ import pandas as pd
 class Cog:
 
     #초기화
-    def __init__(self, file_url, fixed_point):
+    def __init__(self, file_url, fixed_point, dynamic_count):
         self.file = file_url
         self.fixed_point = fixed_point
+        self.name_list = ['거점'+str(i+1) for i in range(len(fixed_point)+dynamic_count)]
+
 
     # 엑셀 데이터 로드
     def load_excel_data(self):
@@ -62,6 +64,22 @@ class Cog:
 
 
 
+    #apply함수를 위한 함수들
+    #위도
+    def func(self, dt) :
+      
+        for i in range(len(self.name_list)):
+            if dt == self.name_list[i]:
+                a  = test_list[i][0]/3600
+                return a
+            
+    #경도
+    def func1(self, dt) :
+        for i in range(len(self.name_list)):
+            if dt == self.name_list[i]:
+                a = test_list[i][1]/3600
+                return a
+
     def cal_point_result(self, df, point_list, d_count):
 
         s_df =pd.DataFrame()
@@ -83,16 +101,13 @@ class Cog:
             d_s['가상 거점_y(곡률값)'] = d_s['가상 거점_y'] / 0.0245 + d_s['위도간 거리(기준)_곡률값']
 
             
-            if( count <= d_count):
-                d_s['위경도 좌표_x'] = point_list[i][1]/3600
-                d_s['위경도 좌표_y'] = point_list[i][0]/3600
-            else:
-                d_s['위경도 좌표_x'] = d_s['가상 거점_x(곡률값)']/3600
-                d_s['위경도 좌표_y'] = d_s['가상 거점_y(곡률값)']/3600
+           
+            d_s['위경도 좌표_x'] = d_s['가상 거점_x(곡률값)']/3600
+            d_s['위경도 좌표_y'] = d_s['가상 거점_y(곡률값)']/3600
 
-            
-            
-            
+            d_s['위경도 좌표_y'] = d_s['선택'].apply(self.func)
+            d_s['위경도 좌표_x'] = d_s['선택'].apply(self.func1)
+
             
             d_s['거래처수'] = d_s['선택'].count()
 
@@ -131,5 +146,6 @@ class Cog:
         s_df['Total Cost'] = s_df['Transport Cost'] + s_df['Warehous_Cost'] * np.sqrt(1)
 
         return s_df
+
 
 
