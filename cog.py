@@ -69,14 +69,14 @@ class Cog:
     #위도
     def func(self, dt) :
         for i in range(len(self.fixed_point)):
-            if dt == self.name_point[i]:
+            if dt == self.name_list[i]:
                 a  = self.fixed_point[i][0]/3600
                 return a
 
     #경도
     def func1(self, dt) :
         for i in range(len(self.fixed_point)):
-            if dt == self.name_point[i]:
+            if dt == self.name_list[i]:
                 a = self.fixed_point[i][1]/3600
                 return a
 
