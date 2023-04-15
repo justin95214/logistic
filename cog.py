@@ -70,14 +70,14 @@ class Cog:
       
         for i in range(len(self.name_list)):
             if dt == self.name_list[i]:
-                a  = test_list[i][0]/3600
+                a  = self.fixed_point[i][0]/3600
                 return a
             
     #경도
     def func1(self, dt) :
         for i in range(len(self.name_list)):
             if dt == self.name_list[i]:
-                a = test_list[i][1]/3600
+                a = self.fixed_point[i][1]/3600
                 return a
 
     def cal_point_result(self, df, point_list, d_count):
