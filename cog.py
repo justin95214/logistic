@@ -117,7 +117,7 @@ class Cog:
             if len(tmp) > 0:
                 if tmp[0] == None:
                     d_s['위경도 좌표_x'] = d_s['가상 거점_x(곡률값)']/3600
-            if len(tmp) ==0:
+            if len(tmp) > 0:
                 if tmp[0] == None:
                     d_s['위경도 좌표_y'] = d_s['가상 거점_y(곡률값)']/3600
             
