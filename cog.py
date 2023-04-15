@@ -111,13 +111,15 @@ class Cog:
             d_s['위경도 좌표_y'] = d_s['선택'].apply(self.func)
             d_s['위경도 좌표_x'] = d_s['선택'].apply(self.func1)
             
-            print(d_s['위경도 좌표_x'].values.tolist())
+
             tmp = d_s['위경도 좌표_x'].values.tolist()
             
+            if len(tmp) > 0:
+                if tmp[0] == None:
+                    d_s['위경도 좌표_x'] = d_s['가상 거점_x(곡률값)']/3600
             if len(tmp) ==0:
-                d_s['위경도 좌표_x'] = d_s['가상 거점_x(곡률값)']/3600
-            if len(tmp) ==0:
-                d_s['위경도 좌표_y'] = d_s['가상 거점_y(곡률값)']/3600
+                if tmp[0] == None:
+                    d_s['위경도 좌표_y'] = d_s['가상 거점_y(곡률값)']/3600
             
             d_s['거래처수'] = d_s['선택'].count()
 
