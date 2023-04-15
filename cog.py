@@ -107,7 +107,7 @@ class Cog:
             d_x = d_s['위경도 좌표_x'] .values.tolist()[0]
             
             d_s['위경도 좌표_y'] = d_s['가상 거점_y(곡률값)']/3600
-            d_y = d_s['위경도 좌표_y] .values.tolist()[0]
+            d_y = d_s['위경도 좌표_y'] .values.tolist()[0]
             
             list_a = self.fixed_point
             list_a.append((d_y, d_x))
