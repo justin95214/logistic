@@ -8,7 +8,7 @@ class Cog:
     def __init__(self, file_url, fixed_point, dynamic_count):
         self.file = file_url
         self.fixed_point = fixed_point
-        self.name_list = ['거점'+str(i+1) for i in range(len(fixed_point)+dynamic_count)]
+        self.name_list = ['거점'+str(i+1) for i in range(len(fixed_point)]
 
 
     # 엑셀 데이터 로드
