@@ -20,21 +20,21 @@ class ABC_analysis:
       try: 
         df = pd.read_excel(io.BytesIO(self.myfile[self.url]))
       except:
-        df = pd.read_excel('/content/재고_DATA.xlsx')
+        df = pd.read_excel('/content/logistic/재고_DATA.xlsx')
 
 
     if self.string_type == "release":
       try: 
         df = pd.read_excel(io.BytesIO(self.myfile[self.url]))
       except:
-        df = pd.read_excel('/content/출고_DATA.xlsx')
+        df = pd.read_excel('/content/logistic/출고_DATA.xlsx')
 
 
     if self.string_type == "order":
       try: 
         df = pd.read_excel(io.BytesIO(self.myfile[self.url]))
       except:
-        df = pd.read_excel('/content/주문_DATA.xlsx')
+        df = pd.read_excel('/content/logistic/주문_DATA.xlsx')
 
 
     return df
